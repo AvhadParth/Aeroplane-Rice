@@ -9,3 +9,5 @@ dist
 /Aeroplane-Basmati-Brand-Guidelines-2026-v5.pdf
 /source-images/
 /_draft-1/
+.vercel
+.env*
