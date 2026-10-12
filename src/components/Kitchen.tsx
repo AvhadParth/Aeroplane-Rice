@@ -1,10 +1,9 @@
 import { QuickAdd } from './Cart';
-import { Icon, Img, Notch, Sketch } from './ui';
+import { Icon, Img, Notch } from './ui';
 
 export function Kitchen() {
   return (
     <section className="kitchen light" id="kitchen">
-      <Sketch name="kitchen" alt="A brass handi, a clay pot, a bowl of rice, a spice box, a sack of rice and a wooden scoop" className="kitchen__sketch" />
       <div className="wrap">
         <div className="head">
           <h2 className="display">From our kitchen.</h2>
@@ -25,7 +24,7 @@ export function Kitchen() {
                 <li><span><b>Soak</b> for thirty minutes. The grain drinks before it cooks.</span></li>
                 <li><span><b>Rest</b> ten minutes off the heat, lid on. Then fluff with a fork.</span></li>
               </ol>
-              <QuickAdd productId="reserve" className="story__buy story__buy--feature" />
+              <QuickAdd productId="classic-basmati-rice" className="story__buy story__buy--feature" />
             </div>
           </article>
 
@@ -37,7 +36,7 @@ export function Kitchen() {
               <p className="label story__kind"><Icon name="bowl" />Recipe, 30 min</p>
               <h3><a href="#kitchen">Weeknight vegetable pulao, one pot</a></h3>
               <p>Whole spices, whatever vegetables are in the house, and rice that has soaked while you chopped.</p>
-              <QuickAdd productId="classic" className="story__buy" />
+              <QuickAdd productId="raw-la-taste-basmati-rice" className="story__buy" />
             </div>
           </article>
 
@@ -52,7 +51,6 @@ export function Kitchen() {
           </article>
         </div>
       </div>
-      <Sketch name="family" alt="Three generations of a family sharing rice from a brass platter" className="kitchen__family" />
     </section>
   );
 }

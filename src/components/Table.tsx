@@ -6,10 +6,10 @@ import { Img, Notch, type IconName } from './ui';
 const ease = [0.2, 0.7, 0.1, 1] as const;
 
 const dishes: { name: string; region: string; photo: string; alt: string; icon: IconName; rice: string; text: string }[] = [
-  { name: 'Biryani', region: 'Hyderabad', photo: 'biryani', rice: 'reserve', alt: 'Hyderabadi chicken biryani in a brass handi', icon: 'handi', text: "Sealed and cooked on dum, so the grain steams in the meat's own fragrance. It needs a rice that stays long and separate under the lid." },
-  { name: 'Dal chawal', region: 'Everywhere', photo: 'dal-chawal', rice: 'classic', alt: 'Dal chawal on a steel thali with ghee and lemon', icon: 'bowl', text: 'The meal India comes home to. Yellow dal, plain rice, a spoon of ghee, and nothing to prove.' },
-  { name: 'Pulao', region: 'North India', photo: 'pulao', rice: 'classic', alt: 'Vegetable pulao on a brass plate', icon: 'scoop', text: 'Whole spices bloomed in ghee, vegetables, and rice cooked in the same pot until each grain has taken on the flavour.' },
-  { name: 'Chitranna', region: 'Karnataka', photo: 'lemon-rice', rice: 'classic', alt: 'Lemon rice with peanuts and curry leaves on a banana leaf', icon: 'scatter', text: "Yesterday's rice, today's lunch: lemon, mustard seed, curry leaf and peanuts, eaten off a banana leaf." },
+  { name: 'Biryani', region: 'Hyderabad', photo: 'biryani', rice: '1121-extra-long-grain-rice', alt: 'Hyderabadi chicken biryani in a brass handi', icon: 'handi', text: "Sealed and cooked on dum, so the grain steams in the meat's own fragrance. It needs a rice that stays long and separate under the lid." },
+  { name: 'Dal chawal', region: 'Everywhere', photo: 'dal-chawal', rice: 'rozana-premium-basmati-rice', alt: 'Dal chawal on a steel thali with ghee and lemon', icon: 'bowl', text: 'The meal India comes home to. Yellow dal, plain rice, a spoon of ghee, and nothing to prove.' },
+  { name: 'Pulao', region: 'North India', photo: 'pulao', rice: 'raw-la-taste-basmati-rice', alt: 'Vegetable pulao on a brass plate', icon: 'scoop', text: 'Whole spices bloomed in ghee, vegetables, and rice cooked in the same pot until each grain has taken on the flavour.' },
+  { name: 'Chitranna', region: 'Karnataka', photo: 'lemon-rice', rice: 'premium-sona-masoori-rice-5kg', alt: 'Lemon rice with peanuts and curry leaves on a banana leaf', icon: 'scatter', text: "Yesterday's rice, today's lunch: lemon, mustard seed, curry leaf and peanuts, eaten off a banana leaf." },
 ];
 
 export function Table() {

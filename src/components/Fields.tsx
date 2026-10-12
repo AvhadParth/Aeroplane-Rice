@@ -19,7 +19,7 @@ export function Fields() {
     <section className="fields dark" id="fields">
       <div className="fields__hero" ref={hero}>
         <m.div style={{ y }}>
-          <Img name="field" alt="Green basmati paddy fields in north India at golden hour" sizes="100vw" />
+          <Img name="cover" alt="Ripe paddy, jute and a bowl of milled basmati rice" sizes="100vw" />
         </m.div>
         <div className="wrap fields__title">
           <h2 className="display">From the fields of India.</h2>

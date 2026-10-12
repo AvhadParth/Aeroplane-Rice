@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
-import { FREE_DELIVERY_FROM, price } from '../products';
 import { CartButton, useCart } from './Cart';
 
 const links = [
@@ -20,7 +19,7 @@ export function Header() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <p className="announce">Free delivery across India on orders over {price(FREE_DELIVERY_FROM)}. <a href="#range">Shop now</a></p>
+      <p className="announce">Free 1 kg sugar with 5, 10 and 20 kg packs of Raw La-Taste Basmati. <a href="#range">Shop now</a></p>
       <header className="site-header">
         <div className="site-header__pill">
           <a className="site-header__logo" href="#top" aria-label="Aeroplane Basmati, home">

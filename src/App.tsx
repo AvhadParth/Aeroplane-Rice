@@ -1,6 +1,7 @@
 import { LazyMotion, MotionConfig, domAnimation } from 'motion/react';
 import { CartProvider } from './components/Cart';
 import { Header, ShopBar } from './components/Header';
+import { Band } from './components/ui';
 import { Hero } from './components/Hero';
 import { Heritage } from './components/Heritage';
 import { Pour } from './components/Pour';
@@ -19,12 +20,15 @@ export function App() {
       <Header />
       <main id="main">
         <Hero />
+        <Band art="harvest" />
         <Heritage />
         <Pour />
         <Range />
         <Fields />
         <Table />
+        <Band art="kitchen" tone="rice" />
         <Kitchen />
+        <Band art="dance" />
         <Promise />
         <Story />
         <Faq />

@@ -1,4 +1,5 @@
-import { useId, type ReactNode } from 'react';
+import { useId, useRef, type ReactNode } from 'react';
+import { m, useScroll, useTransform } from 'motion/react';
 
 // [full width, height, small width]; anything not listed is a 1024 x 1536 portrait
 const SIZES: Record<string, [number, number, number]> = {
@@ -75,5 +76,17 @@ export function Notch({ icon }: { icon: IconName }) {
     <span className="notch" aria-hidden="true">
       <span className="notch__dot"><Icon name={icon} /></span>
     </span>
+  );
+}
+
+/** A Warli frieze that runs between sections and drifts sideways as the page moves. */
+export function Band({ art, tone = 'indigo' }: { art: 'harvest' | 'dance' | 'kitchen'; tone?: 'indigo' | 'rice' }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const x = useTransform(scrollYProgress, [0, 1], ['0px', '-260px']);
+  return (
+    <div className={`band band--${tone}`} ref={ref} aria-hidden="true">
+      <m.div className="band__art" style={{ x, maskImage: `url(/assets/art/warli-${art}.svg)`, WebkitMaskImage: `url(/assets/art/warli-${art}.svg)` }} />
+    </div>
   );
 }

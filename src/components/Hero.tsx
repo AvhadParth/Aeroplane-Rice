@@ -1,53 +1,108 @@
-import { useRef } from 'react';
-import { m, useScroll, useTransform } from 'motion/react';
-import { Img, Sketch } from './ui';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { Img } from './ui';
 
-const ease = [0.2, 0.7, 0.1, 1] as const;
+const HEADLINE = 'The long grain of India.';
+const ZOOM = 150;
 
+/**
+ * The opening. A cream sheet covers a photograph, and the headline is cut out of the sheet,
+ * so the picture shows only through the letters. Scrolling moves in through the stem of the
+ * "l" until the photograph fills the screen.
+ */
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['-3%', '7%']);
-  const lift = useTransform(scrollYProgress, [0, 1], ['0%', '-14%']);
+  const section = useRef<HTMLElement>(null);
+  const pin = useRef<HTMLDivElement>(null);
+  const text = useRef<SVGTextElement>(null);
+  const cut = useRef<SVGGElement>(null);
+  const origin = useRef({ x: 0, y: 0 });
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const reduced = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
+  const intro = useTransform(scrollYProgress, [0.09, 0.2], [1, 0]);
+  const outro = useTransform(scrollYProgress, [0.72, 0.92], [0, 1]);
+  const photo = useTransform(scrollYProgress, [0, 1], [1.16, 1]);
+  const sheet = useTransform(scrollYProgress, [0.6, 0.74], [1, 0]);
+
+  const narrow = box.w < 760;
+  const lines = narrow ? ['The long', 'grain', 'of India.'] : ['The long grain', 'of India.'];
+  const size = narrow ? box.w * 0.205 : Math.min(box.w * 0.122, box.h * 0.27);
+  const left = Math.max(20, Math.min(box.w * 0.05, 80));
+  const first = box.h * (narrow ? 0.3 : 0.42) - ((lines.length - 1) * size) / 2 + size * 0.36;
+
+  const place = useCallback((progress: number) => {
+    if (!cut.current) return;
+    const eased = Math.min(1, Math.max(0, (progress - 0.1) / 0.62));
+    const scale = reduced ? 1 : Math.exp(eased * eased * Math.log(ZOOM));
+    const { x, y } = origin.current;
+    cut.current.setAttribute('transform', `translate(${x} ${y}) scale(${scale}) translate(${-x} ${-y})`);
+  }, [reduced]);
+
+  useEffect(() => {
+    if (!pin.current) return;
+    const watch = new ResizeObserver(([entry]) => setBox({ w: entry.contentRect.width, h: entry.contentRect.height }));
+    watch.observe(pin.current);
+    return () => watch.disconnect();
+  }, []);
+
+  // aim the zoom at the stem of the "l", which is solid ink all the way through
+  useEffect(() => {
+    const measure = () => {
+      if (!text.current || !box.w) return;
+      const stem = text.current.getExtentOfChar(HEADLINE.indexOf('l'));
+      // the measured box runs half a letter-space wide of the ink, so step back onto the stem
+      origin.current = { x: stem.x + stem.width / 2 - size * 0.025, y: stem.y + stem.height * 0.42 };
+      place(scrollYProgress.get());
+    };
+    measure();
+    document.fonts.ready.then(measure);
+  }, [box, size, place, scrollYProgress]);
+
+  useMotionValueEvent(scrollYProgress, 'change', place);
 
   return (
-    <section className="hero light" id="top" ref={ref}>
-      <div className="wrap hero__grid">
-        <div className="hero__copy">
+    <section className="hero" id="top" ref={section} data-still={reduced || undefined}>
+      <div className="hero__pin" ref={pin}>
+        <m.div className="hero__photo" style={{ scale: reduced ? 1 : photo }}>
+          <Img name="field" alt="Basmati paddy fields at sunrise, with hills in the distance" sizes="100vw" eager />
+        </m.div>
+
+        <h1 className="sr">{HEADLINE}</h1>
+        {box.w > 0 && (
+          <m.svg className="hero__sheet" viewBox={`0 0 ${box.w} ${box.h}`} width={box.w} height={box.h} aria-hidden="true" style={{ opacity: reduced ? 1 : sheet }}>
+            <defs>
+              <mask id="hero-cut" maskUnits="userSpaceOnUse" x="0" y="0" width={box.w} height={box.h}>
+                <rect width={box.w} height={box.h} fill="#fff" />
+                <g ref={cut}>
+                  <text ref={text} className="hero__letters" fontSize={size} fill="#000">
+                    {lines.map((line, i) => <tspan key={line} x={left} y={first + i * size * 0.98}>{line}{i < lines.length - 1 ? ' ' : ''}</tspan>)}
+                  </text>
+                </g>
+              </mask>
+            </defs>
+            <rect width={box.w} height={box.h} fill="#FBF6E9" mask="url(#hero-cut)" />
+          </m.svg>
+        )}
+
+        <m.div className="wrap hero__intro" style={{ opacity: reduced ? 1 : intro }}>
           <p className="label hero__since">Aged basmati, since 1969</p>
-          <h1 className="hero__title">
-            {['The long grain', 'of India.'].map((line, i) => (
-              <span className="line" key={line}>
-                <m.span initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1, delay: i * 0.1, ease }}>{line}</m.span>
-              </span>
-            ))}
-          </h1>
-          <p className="lede hero__lede">Basmati grown at the foot of the Himalayas, cut by hand, and rested for eight months before it is milled. Slender, fragrant, and never in a hurry.</p>
-          <div className="hero__actions">
-            <a className="btn" href="#range">Shop the range</a>
-            <a className="btn btn--line" href="#kitchen">Cook with it</a>
+          <div className="hero__foot">
+            <p className="lede">Basmati grown at the foot of the Himalayas, cut by hand, and rested for eight months before it is milled.</p>
+            <div className="hero__actions">
+              <a className="btn" href="#range">Shop the range</a>
+              <a className="btn btn--line" href="#heritage">Our heritage</a>
+            </div>
           </div>
-          <p className="hero__assure">From ₹199. Free delivery over ₹999. Cash on delivery available.</p>
-        </div>
+        </m.div>
 
-        <div className="hero__art">
-          <m.img
-            className="hero__stalks" src="/assets/art/ill-paddy.webp" srcSet="/assets/art/ill-paddy-s.webp 661w, /assets/art/ill-paddy.webp 952w" sizes="(min-width: 900px) 24vw, 46vw"
-            alt="" width={952} height={1475}
-            initial={{ rotate: -8, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} transition={{ duration: 1.6, delay: 0.5, ease }}
-          />
-          <m.div className="hero__arch hero__arch--main" initial={{ clipPath: 'inset(100% 0 0 0)' }} animate={{ clipPath: 'inset(0% 0 0 0)' }} transition={{ duration: 1.4, delay: 0.15, ease }}>
-            <m.div style={{ y }}>
-              <Img name="paddy-gold" alt="Golden basmati paddy, heavy with grain, at sunset" sizes="(min-width: 900px) 30vw, 62vw" eager />
-            </m.div>
+        {!reduced && (
+          <m.div className="wrap hero__outro" style={{ opacity: outro }}>
+            <p>Slender, fragrant, and never in a hurry.</p>
+            <a className="btn btn--yellow" href="#range">Shop the range</a>
           </m.div>
-          <m.div className="hero__arch hero__arch--side" style={{ y: lift }} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.7, ease }}>
-            <Img name="steamed" alt="A bowl of steamed basmati rice" sizes="(min-width: 900px) 15vw, 34vw" />
-          </m.div>
-        </div>
+        )}
       </div>
-
-      <Sketch name="harvest" alt="Farmers cutting and carrying paddy, with a bullock cart and a village under a banyan tree" className="hero__sketch" />
     </section>
   );
 }

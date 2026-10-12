@@ -19,5 +19,6 @@ npm run build    # type-check and build to dist/
 
 ## Not finished
 
-- Prices, pack sizes, delivery terms and the timeline copy are placeholders.
-- Checkout is not connected to a payment or order system; the cart is stored in the browser only.
+- Products, prices and pack photographs come from an export of shop.aeroplanerice.com taken on 12 October 2026 (`src/products.ts`); they do not update on their own.
+- The cart is stored in the browser only. "Continue to the shop" opens the live shop; the cart does not carry over.
+- The timeline and most body copy are placeholder wording.

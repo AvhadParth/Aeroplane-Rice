@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { FREE_DELIVERY_FROM, price, products } from '../products';
+import { SHOP_URL, firstInStock, price, products } from '../products';
 
 type Line = { id: string; productId: string; size: string; quantity: number };
 type CartValue = {
@@ -35,14 +35,13 @@ export function Stepper({ value, onChange, label }: { value: number; onChange: (
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<Line[]>(load);
-  const [notice, setNotice] = useState(false);
   const drawer = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     try { localStorage.setItem(STORE, JSON.stringify(lines)); } catch { /* storage unavailable: the cart lasts for this visit */ }
   }, [lines]);
 
-  const open = useCallback(() => { setNotice(false); drawer.current?.showModal(); }, []);
+  const open = useCallback(() => drawer.current?.showModal(), []);
 
   const add = useCallback((productId: string, size: string, quantity = 1) => {
     const id = `${productId}:${size}`;
@@ -59,11 +58,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const rows = lines.flatMap((line) => {
     const product = products.find((p) => p.id === line.productId);
     const variant = product?.variants.find((v) => v.size === line.size);
-    return product && variant ? [{ ...line, product, each: variant.price }] : [];
+    return product && variant ? [{ ...line, product, each: variant.price, was: variant.was }] : [];
   });
   const count = rows.reduce((sum, row) => sum + row.quantity, 0);
   const subtotal = rows.reduce((sum, row) => sum + row.each * row.quantity, 0);
-  const toFree = FREE_DELIVERY_FROM - subtotal;
+  const saved = rows.reduce((sum, row) => sum + (row.was - row.each) * row.quantity, 0);
 
   const value = useMemo(() => ({ lines, count, add, setQuantity, open }), [lines, count, add, setQuantity, open]);
 
@@ -85,14 +84,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
             </div>
           ) : (
             <>
-              <div className="cart__delivery">
-                <p>{toFree > 0 ? <>Add <b>{price(toFree)}</b> more for free delivery.</> : <>You have free delivery.</>}</p>
-                <progress max={FREE_DELIVERY_FROM} value={Math.min(subtotal, FREE_DELIVERY_FROM)} aria-label="Progress towards free delivery" />
-              </div>
               <ul className="cart__lines">
                 {rows.map((row) => (
                   <li key={row.id}>
-                    <img src="/assets/img/pouch-s.webp" alt="" width={640} height={640} loading="lazy" />
+                    <img src={row.product.image} alt="" width={row.product.width} height={row.product.height} loading="lazy" />
                     <div>
                       <h3>{row.product.name}</h3>
                       <p>{row.size}, {price(row.each)}</p>
@@ -107,9 +102,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
               </ul>
               <footer className="cart__foot">
                 <p className="cart__total"><span>Subtotal</span><b>{price(subtotal)}</b></p>
-                <p className="cart__note">Taxes included. Delivery is calculated at checkout.</p>
-                <button type="button" className="btn cart__checkout" onClick={() => setNotice(true)}>Checkout</button>
-                <p className="cart__status" role="status">{notice && 'Online checkout is being set up. To order today, write to orders@aeroplanerice.com.'}</p>
+                {saved > 0 && <p className="cart__saved">You save {price(saved)} on shop prices.</p>}
+                <p className="cart__note">Payment and delivery are completed on the Aeroplane online shop, where you can pick these packs again at the same prices.</p>
+                <a className="btn cart__checkout" href={`${SHOP_URL}/shop/`} target="_blank" rel="noopener">Continue to the shop</a>
               </footer>
             </>
           )}
@@ -123,9 +118,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function QuickAdd({ productId, className = '' }: { productId: string; className?: string }) {
   const { add } = useCart();
   const product = products.find((p) => p.id === productId)!;
-  const variant = product.variants[0];
+  const variant = firstInStock(product);
   return (
-    <button type="button" className={`btn btn--small ${className}`} onClick={() => add(product.id, variant.size)}>
+    <button type="button" className={`btn btn--small ${className}`} disabled={!variant.inStock} onClick={() => add(product.id, variant.size)}>
       Add {product.name} {variant.size}, {price(variant.price)}
     </button>
   );
