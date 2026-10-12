@@ -1,0 +1,11 @@
+node_modules
+dist
+.playwright-mcp
+.DS_Store
+
+# Reference material kept out of the repository: client mood board (includes third-party stock images),
+# brand guideline PDFs and working sources, raw image exports, and the discarded first draft.
+/Aeroplane Rice /
+/Aeroplane-Basmati-Brand-Guidelines-2026-v5.pdf
+/source-images/
+/_draft-1/
