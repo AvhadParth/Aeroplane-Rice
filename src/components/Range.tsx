@@ -22,8 +22,8 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="product">
-      <a className="product__shot" href={`/products/${product.id}`} aria-label={`${product.name}, see details`}>
-        <img src={product.image} alt="" width={product.width} height={product.height} loading="lazy" decoding="async" />
+      <a className="product__shot" href={`/products/${product.id}`}>
+        <img src={product.image} alt={product.name} width={product.width} height={product.height} loading="lazy" decoding="async" />
         {!variant.inStock ? <span className="product__flag product__flag--out">Sold out</span>
           : saving > 0 && <span className="product__flag">Save {saving}%</span>}
       </a>

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { LazyMotion, MotionConfig, domAnimation } from 'motion/react';
 import { settle, usePath } from './router';
+import { setSeo } from './seo';
+import { Marketplaces } from './components/Marketplaces';
 import { CartProvider } from './components/Cart';
 import { Header, ShopBar } from './components/Header';
 import { Band } from './components/ui';
@@ -23,6 +25,7 @@ function Home() {
       <Heritage />
       <Pour />
       <Range />
+      <Marketplaces query="Aeroplane basmati rice" />
       <Fields />
       <Table />
       <Band art="kitchen" tone="rice" />
@@ -41,6 +44,7 @@ export function App() {
 
   // a link such as /#range opened directly: the section does not exist until the page has rendered
   useEffect(() => { if (location.hash) settle(location.hash); }, []);
+  useEffect(() => { if (!productId) setSeo(); }, [productId]);
 
   return (
     <LazyMotion features={domAnimation} strict>

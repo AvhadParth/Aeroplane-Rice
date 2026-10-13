@@ -3,6 +3,8 @@ import { details } from '../product-details';
 import { firstInStock, price, products, type Variant } from '../products';
 import { Stepper, useCart } from './Cart';
 import { ProductCard, Reasons } from './Range';
+import { productSummary, setSeo } from '../seo';
+import { Marketplaces } from './Marketplaces';
 import { Band } from './ui';
 
 /** Weight of a pack in kilograms, when the size says so plainly. */
@@ -32,10 +34,14 @@ export function ProductPage({ id }: { id: string }) {
   const [shot, setShot] = useState(0);
 
   useEffect(() => {
-    const before = document.title;
-    document.title = product ? `${product.name} | Aeroplane Basmati Rice` : 'Product not found | Aeroplane Basmati Rice';
-    return () => { document.title = before; };
-  }, [product]);
+    if (!product) { setSeo({ title: 'Product not found | Aeroplane Basmati Rice', path: `/products/${id}` }); return; }
+    const lowest = Math.min(...product.variants.map((v) => v.price));
+    setSeo({
+      title: `${product.name} | Aeroplane Basmati Rice`,
+      description: productSummary(product.name, product.variants.map((v) => v.size), price(lowest)),
+      path: `/products/${product.id}`,
+    });
+  }, [product, id]);
 
   if (!product) {
     return (
@@ -116,6 +122,7 @@ export function ProductPage({ id }: { id: string }) {
                 <a className="btn btn--line" href={product.url} target="_blank" rel="noopener">Buy now</a>
               </div>
               <p className="pdp__note">Buy now opens this product on the Aeroplane online shop, where payment and delivery are completed.</p>
+              <Marketplaces query={`Aeroplane ${product.name}`} compact />
 
               <dl className="pdp__facts">
                 <div><dt className="label">Availability</dt><dd>{variant.inStock ? 'In stock' : 'Sold out in this size'}</dd></div>
