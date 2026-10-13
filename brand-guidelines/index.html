@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<title>Aeroplane Basmati Brand Guidelines 2026</title>
+<style>
+@font-face { font-family: "Montserrat"; src: url("../public/assets/fonts/montserrat.woff2") format("woff2"); font-weight: 600 700; }
+@font-face { font-family: "Manrope"; src: url("../public/assets/fonts/manrope.woff2") format("woff2"); font-weight: 400 600; }
+@page { size: 1600px 900px; margin: 0; }
+:root {
+  --indigo: #322B6A; --paper: #FDFCF9; --yellow: #FFED00; --red: #E31E24; --green: #009846; --night: #14112A; --white: #fff;
+  --rule: rgb(50 43 106 / .18);
+  --display: "Montserrat", sans-serif; --body: "Manrope", sans-serif;
+  --stitch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M0 6h46M74 6h46' stroke='%23E31E24' stroke-width='1.5' stroke-dasharray='6 4'/%3E%3Cpath d='M60 1l5 5-5 5-5-5z' fill='%23E31E24'/%3E%3C/svg%3E");
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font: 400 16px/1.55 var(--body); color: var(--night); background: #cfccc4; }
+img { display: block; }
+ul { list-style: none; }
+
+/* every page: 1600 x 900, an 84 px margin, content ends by 820 px, footer at 852 px */
+.page { position: relative; width: 1600px; height: 900px; padding: 72px 84px 0; overflow: hidden; background: var(--paper); break-after: page; }
+.foot { position: absolute; inset: auto 84px 32px; display: flex; justify-content: space-between; font: 600 11px/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--indigo); opacity: .65; }
+.split { display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 72px; }
+.side { display: grid; gap: 24px; align-content: start; }
+
+h2 { font: 600 72px/.98 var(--display); letter-spacing: -.05em; color: var(--indigo); }
+h2::after { content: ""; display: block; width: 120px; height: 12px; margin-top: 24px; background: var(--stitch) left / contain no-repeat; }
+h3 { font: 700 18px/1.25 var(--display); letter-spacing: -.02em; color: var(--indigo); }
+.label { font: 600 11.5px/1.3 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); }
+.lede { font-size: 20px; line-height: 1.5; color: var(--indigo); }
+.note { font-size: 14px; line-height: 1.5; }
+.rules li { position: relative; padding: 12px 0 12px 28px; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.45; }
+.rules li:first-child { border-top: 1px solid var(--rule); }
+.rules li::before { content: ""; position: absolute; left: 4px; top: 19px; width: 8px; height: 8px; rotate: 45deg; background: var(--red); }
+.rules b { font-weight: 600; color: var(--indigo); }
+.fit { width: 100%; height: 100%; object-fit: cover; }
+.band { background: currentColor; -webkit-mask: var(--m) left center / auto 100% repeat-x; mask: var(--m) left center / auto 100% repeat-x; }
+.mask { display: block; background: currentColor; -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+.tile { position: relative; overflow: hidden; border: 1px solid var(--rule); background: var(--white); }
+.tile--indigo { background: var(--indigo); border-color: var(--indigo); color: var(--paper); }
+.cap { margin-top: 14px; }
+.cap p { margin-top: 4px; font-size: 14px; line-height: 1.45; }
+.photo-type { background: url("img/field.jpg") center 58% / cover; -webkit-background-clip: text; background-clip: text; color: transparent; font-family: var(--display); font-weight: 700; letter-spacing: -.05em; }
+
+/* 1 cover: the field, with the logo on a white plate in front of it */
+.cover { padding: 0; color: var(--white); }
+.cover__art { position: absolute; inset: 0; }
+.cover__art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgb(20 17 42 / .42), rgb(20 17 42 / .18) 30%, rgb(20 17 42 / .34) 58%, rgb(20 17 42 / .86)); }
+.cover__band { position: absolute; z-index: 1; inset: auto 0 78px; height: 92px; color: var(--white); --m: url("../public/assets/art/warli-dance.svg"); }
+.cover__year, .cover__plate, .cover h1, .cover .foot { z-index: 6; }
+.cover__year { position: absolute; left: 84px; top: 72px; color: var(--white); }
+.cover__plate { position: absolute; left: 50%; top: 150px; width: 330px; height: 330px; translate: -50% 0; display: grid; place-items: center; }
+.cover__plate img { width: 300px; }
+.cover h1 { position: absolute; inset: 532px 84px auto; text-align: center; font: 600 84px/1 var(--display); letter-spacing: -.05em; color: var(--white); }
+.cover .foot { color: var(--white); opacity: .85; }
+
+/* 2 logo */
+.logo-main { position: relative; height: 420px; display: grid; place-items: center; background: var(--white); border: 1px solid var(--rule); }
+.logo-main img { width: 244px; }
+.logo-main i { position: absolute; left: 50%; top: 50%; width: 358px; height: 358px; translate: -50% -50%; border: 1.5px dashed var(--green); }
+.logo-main span { position: absolute; left: calc(50% - 179px); top: calc(50% - 200px); color: var(--green); }
+.logo-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.logo-row div { height: 170px; display: grid; place-items: center; }
+
+/* 3 colour */
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; margin-top: 44px; }
+.chip { height: 300px; padding: 22px; display: flex; flex-direction: column; justify-content: flex-end; }
+.chip b { font: 700 21px/1.15 var(--display); letter-spacing: -.02em; }
+.chip span { margin-top: 8px; font: 600 13px/1.5 var(--body); letter-spacing: .06em; }
+.swatch p { margin-top: 14px; font-size: 14px; line-height: 1.45; }
+.mix { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 40px; }
+.mix__bar { display: flex; height: 34px; margin-top: 14px; border: 1px solid var(--rule); }
+.pairs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.pairs span { padding: 10px 16px; font: 600 13.5px/1 var(--body); border: 1px solid var(--rule); }
+
+/* 4 type */
+.head-row { display: grid; grid-template-columns: 1fr 520px; gap: 60px; align-items: end; }
+.faces { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 34px; }
+.face { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: end; padding-bottom: 24px; border-bottom: 2px solid var(--indigo); }
+.face__aa { font-size: 168px; line-height: .78; color: var(--indigo); letter-spacing: -.06em; }
+.face h3 { font-size: 28px; }
+.face p { margin-top: 6px; font-size: 14px; line-height: 1.45; }
+.face .glyphs { margin-top: 10px; font-size: 15px; color: var(--indigo); white-space: nowrap; }
+.type-grid { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 72px; margin-top: 8px; }
+.scale > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.scale .sample { color: var(--indigo); white-space: nowrap; }
+.scale .spec { margin-top: 5px; font-size: 13px; line-height: 1.4; }
+.words { padding-top: 16px; }
+.words__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin-top: 8px; }
+.words__grid p { padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.35; }
+.words__grid p:nth-child(odd) { font-weight: 600; color: var(--indigo); }
+.words__grid p:nth-child(even) { opacity: .55; text-decoration: line-through; }
+
+/* 5 type and image */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 40px; }
+.three .tile { height: 440px; }
+.cut { position: absolute; left: 34px; top: 50%; translate: 0 -50%; font-size: 96px; line-height: .98; }
+.through { position: absolute; inset: 0; font: 600 72px/1 var(--display); letter-spacing: -.055em; color: var(--indigo); }
+.through span { position: absolute; white-space: nowrap; }
+.through .a { left: 26px; top: 116px; } .through .b { right: 24px; top: 236px; }
+.through__photo { position: absolute; left: 143px; top: 40px; width: 170px; height: 400px; overflow: hidden; border-radius: 999px 999px 0 0; }
+.through__photo img { filter: brightness(.9); }
+.through__photo .through { inset: -40px auto 0 -143px; width: 456px; height: 440px; color: #fff; text-shadow: 0 0 30px rgb(70 40 10 / .5); }
+.inset { position: absolute; left: 34px; right: 30px; top: 50%; translate: 0 -50%; font: 600 41px/1.16 var(--display); letter-spacing: -.045em; color: var(--indigo); }
+.inset i { display: inline-block; width: 1.5em; height: .74em; margin-inline: .05em; overflow: hidden; vertical-align: -.04em; }
+.inset .pale { opacity: .16; }
+
+/* 6 craft */
+.craft { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 24px; margin-top: 22px; }
+.craft .tile { height: 176px; }
+.strip { height: 132px; display: grid; align-items: center; }
+.strip .band { height: 92px; --m: url("../public/assets/art/warli-harvest.svg"); }
+.seal { position: absolute; inset: 12px 0; }
+.seal svg { position: absolute; left: 50%; top: 0; height: 100%; translate: -50% 0; }
+.seal text { font-family: var(--display); }
+.framed { position: absolute; left: 50px; top: 14px; width: 116px; height: 148px; padding: 4px; background: #fff content-box; border: 10px solid transparent; border-image: url("../public/assets/art/warli-frame.svg") 20 round; }
+.print { position: absolute; left: 50%; top: 16px; width: 124px; padding: 7px 7px 26px; translate: -50% 0; rotate: -3deg; background: #fff; border: 1px solid var(--rule); box-shadow: 0 14px 28px -16px rgb(20 17 42 / .5); }
+.print img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 26px; color: var(--yellow); }
+.icons .mask { width: 62px; height: 62px; }
+.pattern { position: absolute; inset: 0; background: var(--paper); opacity: .09; -webkit-mask: url("../public/assets/brand/pattern-mask.svg") 0 0 / 300px; mask: url("../public/assets/brand/pattern-mask.svg") 0 0 / 300px; }
+
+/* 7 in use */
+.shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.shots img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid var(--rule); }
+.subjects { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--rule); }
+.subjects figure { position: relative; height: 196px; overflow: hidden; }
+.subjects figcaption { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; background: var(--paper); }
+.btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { padding: 14px 22px; border: 2px solid var(--indigo); border-radius: 999px; font: 700 11.5px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; background: var(--indigo); color: var(--paper); }
+.btn--y { background: var(--yellow); border-color: var(--yellow); color: var(--indigo); }
+.btn--l { background: none; color: var(--indigo); }
+</style>
+</head>
+<body>
+
+<!-- 1 Cover -->
+<section class="page cover">
+  <div class="cover__art">
+    <img class="fit" src="img/cover-field.jpg" alt="" style="object-position:50% 34%">
+    <div class="band cover__band"></div>
+  </div>
+  <p class="label cover__year">Brand guidelines 2026</p>
+  <div class="cover__plate"><img src="../public/assets/brand/logo-primary-clear.png" alt="La-Taste Aeroplane Basmati Rice"></div>
+  <h1>The long grain of India.</h1>
+  <div class="foot"><span>Aeroplane Basmati Rice</span><span>Amir Chand Jagdish Kumar (Exports) Limited</span></div>
+</section>
+
+<!-- 2 Logo -->
+<section class="page">
+  <div class="split">
+    <div class="side">
+      <h2>The logo.</h2>
+      <p class="lede">It has been on the sack since 1969. We use it exactly as it was drawn.</p>
+      <ul class="rules">
+        <li><b>Never redraw, stretch, tilt or recolour it.</b> Use the supplied files only.</li>
+        <li><b>Give it room.</b> Keep clear space equal to the height of the word "Rice" on every side.</li>
+        <li><b>Full colour on white.</b> The white version goes on Royal Indigo.</li>
+        <li><b>Smallest size:</b> 120 px or 24 mm wide for the full logo. Below that, use the shield.</li>
+        <li><b>On photographs,</b> place it over a calm, even area, never over faces or busy detail.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="logo-main">
+        <i></i><span class="label">Clear space = one "Rice"</span>
+        <img src="../public/assets/brand/logo-primary.png" alt="Primary logo">
+      </div>
+      <div class="logo-row">
+        <figure><div style="background:var(--indigo)"><img src="../public/assets/brand/logo-primary-white.png" alt="" style="width:128px"></div><figcaption class="cap"><h3>Primary, reversed</h3><p>For Royal Indigo backgrounds.</p></figcaption></figure>
+        <figure><div style="background:var(--white);border:1px solid var(--rule)"><img src="../public/assets/brand/logo-shield.png" alt="" style="width:200px"></div><figcaption class="cap"><h3>The shield</h3><p>Website header and tight spaces.</p></figcaption></figure>
+        <figure><div style="background:var(--yellow)"><img src="../public/assets/brand/plane-indigo.png" alt="" style="width:180px"></div><figcaption class="cap"><h3>The monogram</h3><p>Favicon and stamps, in one colour.</p></figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>02 Logo</span></div>
+</section>
+
+<!-- 3 Colour -->
+<section class="page">
+  <div class="head-row">
+    <h2>Colour.</h2>
+    <p class="lede">A white page, Royal Indigo for the brand, and three brights from the logo used like spice.</p>
+  </div>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#FDFCF9;color:#322B6A;box-shadow:inset 0 0 0 1.5px var(--rule)"><b>Rice White</b><span>#FDFCF9<br>253 252 249</span></div><p>The page. Most of every screen.</p></div>
+    <div class="swatch"><div class="chip" style="background:#322B6A;color:#FDFCF9"><b>Royal Indigo</b><span>#322B6A<br>50 43 106</span></div><p>Headings, buttons, bands, dark sections.</p></div>
+    <div class="swatch"><div class="chip" style="background:#FFED00;color:#322B6A"><b>Harvest Yellow</b><span>#FFED00<br>255 237 0</span></div><p>On indigo only. One yellow button to a screen.</p></div>
+    <div class="swatch"><div class="chip" style="background:#E31E24;color:#fff"><b>Airline Red</b><span>#E31E24<br>227 30 36</span></div><p>Stitches, Warli frames, sale flags, small labels.</p></div>
+    <div class="swatch"><div class="chip" style="background:#009846;color:#fff"><b>Paddy Green</b><span>#009846<br>0 152 70</span></div><p>Recipe marks and confirmations. Graphics only.</p></div>
+    <div class="swatch"><div class="chip" style="background:#14112A;color:#FDFCF9"><b>Night</b><span>#14112A<br>20 17 42</span></div><p>Body text, and behind full-bleed photographs.</p></div>
+  </div>
+  <div class="mix">
+    <div>
+      <p class="label">How much of each</p>
+      <div class="mix__bar"><i style="width:64%;background:#FDFCF9"></i><i style="width:20%;background:#322B6A"></i><i style="width:6%;background:#14112A"></i><i style="width:4%;background:#FFED00"></i><i style="width:4%;background:#E31E24"></i><i style="width:2%;background:#009846"></i></div>
+    </div>
+    <div>
+      <p class="label">Text pairings that pass, with contrast ratio</p>
+      <div class="pairs">
+        <span style="background:#FDFCF9;color:#322B6A">Indigo on White 12.1</span>
+        <span style="background:#322B6A;color:#FDFCF9">White on Indigo 12.1</span>
+        <span style="background:#322B6A;color:#FFED00">Yellow on Indigo 10.3</span>
+        <span style="background:#FDFCF9;color:#14112A">Night on White 17.9</span>
+        <span style="background:#FDFCF9;color:#E31E24">Red on White 4.6</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>03 Colour</span></div>
+</section>
+
+<!-- 4 Typography -->
+<section class="page">
+  <div class="head-row">
+    <h2>Typography.</h2>
+    <p class="lede">Two families. Montserrat speaks, Manrope explains. The logo is the only serif the brand shows.</p>
+  </div>
+  <div class="faces">
+    <div class="face">
+      <div class="face__aa" style="font-family:var(--display);font-weight:700">Aa</div>
+      <div><h3>Montserrat</h3><p>Semibold 600 for headlines. Bold 700 for sub-headings, prices and buttons.</p><p class="glyphs" style="font-family:var(--display);font-weight:600">ABCDEFGHIJ abcdefghij 0123456789 ₹</p></div>
+    </div>
+    <div class="face">
+      <div class="face__aa" style="font-family:var(--body);font-weight:500">Aa</div>
+      <div><h3 style="font-family:var(--body);font-weight:600">Manrope</h3><p>Regular 400 for reading. Medium 500 for navigation, Semibold 600 for labels.</p><p class="glyphs" style="font-family:var(--body);font-weight:500">ABCDEFGHIJ abcdefghij 0123456789 ₹</p></div>
+    </div>
+  </div>
+  <div class="type-grid">
+    <div class="scale">
+      <div><p class="label">Headline</p><div><p class="sample" style="font:600 46px/1 var(--display);letter-spacing:-.05em">The long grain of India.</p><p class="spec">Montserrat 600, tracking −5%, line height 0.98. Sentence case with a full stop.</p></div></div>
+      <div><p class="label">Sub-heading</p><div><p class="sample" style="font:700 26px/1.1 var(--display);letter-spacing:-.02em">Raw La-Taste Basmati</p><p class="spec">Montserrat 700, tracking −2%. Product names, card titles, years.</p></div></div>
+      <div><p class="label">Lede</p><div><p class="sample" style="font:400 20px/1.4 var(--body)">Grown at the foot of the Himalayas, and never in a hurry.</p><p class="spec">Manrope 400, 18 to 22 px, line height 1.5.</p></div></div>
+      <div><p class="label">Body</p><div><p class="sample" style="font:400 16px/1.5 var(--body);color:var(--night)">Rinse three times, soak for thirty minutes, rest ten minutes off the heat.</p><p class="spec">Manrope 400, 17 px, line height 1.65. Lines of 75 characters at most.</p></div></div>
+      <div><p class="label">Label</p><div><p class="sample label">Pack size &nbsp;&nbsp; Aged &nbsp;&nbsp; Best for</p><p class="spec">Manrope 600, 12 px, capitals, tracking +14%. Capitals appear only here and on buttons.</p></div></div>
+    </div>
+    <div class="words">
+      <p class="label">How we write: plain words, short sentences</p>
+      <div class="words__grid">
+        <p>Basmati, given time.</p><p>Premium quality rice!</p>
+        <p>Never in a hurry.</p><p>World-class excellence</p>
+        <p>Pass the rice.</p><p>Elevate your meals</p>
+        <p>Shop the range</p><p>Click here to buy now</p>
+        <p>Add to cart</p><p>Grab yours today!!</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>04 Typography</span></div>
+</section>
+
+<!-- 5 Type and image -->
+<section class="page">
+  <div class="head-row">
+    <h2>Type and image.</h2>
+    <p class="lede">Three ways the words and the photograph work as one. Use one to a screen.</p>
+  </div>
+  <div class="three">
+    <div>
+      <div class="tile"><p class="cut photo-type">The long<br>grain of<br>India.</p></div>
+      <div class="cap"><h3>The cut-out headline</h3><p>The opening starts on the full photograph, then draws back until the picture shows only through the letters.</p></div>
+    </div>
+    <div>
+      <div class="tile">
+        <p class="through"><span class="a">Basmati,</span><span class="b">given time.</span></p>
+        <div class="through__photo"><img class="fit" src="img/hero-pour.jpg" alt=""><p class="through"><span class="a">Basmati,</span><span class="b">given time.</span></p></div>
+      </div>
+      <div class="cap"><h3>Type through the picture</h3><p>A line runs across a photograph: indigo on the page, white inside it. This is the only arch in the system.</p></div>
+    </div>
+    <div>
+      <div class="tile"><p class="inset">For more than five decades, one name <i><img class="fit" src="img/ageing.jpg" alt=""></i> has meant one thing in Indian <span class="pale">kitchens <i><img class="fit" src="img/harvest.jpg" alt=""></i> and far beyond them.</span></p></div>
+      <div class="cap"><h3>The sentence with photographs</h3><p>Small photographs sit in a large sentence like words, and the words fill in from pale to indigo as you read.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>05 Type and image</span></div>
+</section>
+
+<!-- 6 Craft -->
+<section class="page">
+  <div class="split">
+    <div class="side">
+      <h2>Craft and shape.</h2>
+      <p class="lede">The hand-made details, and the one rule about shape.</p>
+      <ul class="rules">
+        <li><b>Sharp rectangles.</b> Photographs, product tiles and panels have square corners.</li>
+        <li><b>No arches or rounded frames,</b> except the single "given time" device.</li>
+        <li><b>Pills are for buttons only.</b></li>
+        <li><b>One flat colour</b> for bands, frames, icons and the seal. No gradients or shadows on them.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="tile tile--indigo strip"><div class="band"></div></div>
+      <div class="cap"><h3>Warli bands</h3><p>Three friezes (harvest, kitchen, dance) run between sections, white on indigo or indigo on white.</p></div>
+      <div class="craft">
+        <div>
+          <div class="tile tile--indigo"><div class="seal">
+            <svg viewBox="0 0 400 400" fill="none" stroke="currentColor">
+              <circle cx="200" cy="200" r="194" stroke-width="3"/><circle cx="200" cy="200" r="186" stroke-width="1"/>
+              <circle cx="200" cy="200" r="134" stroke-width="2.5" stroke-dasharray="62 5"/><circle cx="200" cy="200" r="127" stroke-width="1"/>
+              <g id="wreath" fill="currentColor" stroke="none"></g>
+              <defs><path id="sp" d="M200 200m-152 0a152 152 0 1 1 304 0a152 152 0 1 1-304 0"/></defs>
+              <text fill="currentColor" stroke="none" font-weight="700" font-size="17.5" letter-spacing="2.8"><textPath href="#sp" textLength="946">AEROPLANE BASMATI RICE • PRODUCT OF INDIA • SINCE 1969 •</textPath></text>
+              <text x="200" y="170" text-anchor="middle" fill="currentColor" stroke="none" font-size="17" font-weight="600" letter-spacing="6" style="font-family:var(--body)">SINCE</text>
+              <text x="200" y="236" text-anchor="middle" fill="#FFED00" stroke="none" font-size="76" font-weight="700" letter-spacing="-3">1969</text>
+            </svg>
+          </div></div>
+          <div class="cap"><h3>The seal</h3><p>For provenance and sign-offs. Always on indigo.</p></div>
+        </div>
+        <div>
+          <div class="tile">
+            <div class="framed"><img class="fit" src="img/pack-classic.jpg" alt=""></div>
+            <div style="position:absolute;left:216px;top:46px"><p style="font:600 32px/1 var(--display);letter-spacing:-.05em;color:var(--indigo)">Heading.</p><div style="width:120px;height:12px;margin-top:16px;background:var(--stitch) left/contain no-repeat"></div></div>
+          </div>
+          <div class="cap"><h3>Frame and stitch</h3><p>A thin Warli frame on product tiles, a stitch under headings. Always red.</p></div>
+        </div>
+        <div>
+          <div class="tile"><div class="print"><img src="img/harvest.jpg" alt=""></div></div>
+          <div class="cap"><h3>The print</h3><p>Story photographs are laid down like album prints, slightly tilted.</p></div>
+        </div>
+        <div>
+          <div class="tile tile--indigo"><div class="pattern"></div>
+            <div class="icons">
+              <i class="mask" style="--m:url('../public/assets/art/st-panicle.png')"></i><i class="mask" style="--m:url('../public/assets/art/st-hands.png')"></i><i class="mask" style="--m:url('../public/assets/art/st-sack.png')"></i><i class="mask" style="--m:url('../public/assets/art/st-handi.png')"></i><i class="mask" style="--m:url('../public/assets/art/st-bowl.png')"></i>
+            </div>
+          </div>
+          <div class="cap"><h3>Icons and pattern</h3><p>Block-print icons in one colour; the same shapes, faint, as pattern.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>06 Craft and shape</span></div>
+</section>
+
+<!-- 7 In use -->
+<section class="page">
+  <div class="split">
+    <div class="side">
+      <h2>In use.</h2>
+      <p class="lede">The live website is the reference: aeroplane-rice.vercel.app</p>
+      <div>
+        <p class="label" style="margin-bottom:12px">Photography</p>
+        <ul class="rules">
+          <li><b>Four subjects:</b> the field, the hands, the grain, the table.</li>
+          <li><b>Warm, natural light</b> and real surfaces: jute, brass, wood, steel.</li>
+          <li><b>Hands, not faces.</b> No studio white, no text on photographs.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:12px">Buttons and navigation</p>
+        <div class="btns"><span class="btn">Add to cart</span><span class="btn btn--y">Shop the range</span><span class="btn btn--l">Our heritage</span></div>
+        <p class="note" style="margin-top:12px">Buttons are pills. The navigation is a plain bar of text links: clear over the opening photograph, white once the page scrolls.</p>
+      </div>
+    </div>
+    <div>
+      <div class="shots">
+        <img src="img/site-1-open.jpg" alt="Opening photograph">
+        <img src="img/site-2-headline.jpg" alt="Cut-out headline">
+        <img src="img/site-3-since.jpg" alt="Since 1969">
+        <img src="img/site-4-given-time.jpg" alt="Basmati, given time">
+        <img src="img/site-5-shop.jpg" alt="Shop">
+        <img src="img/site-6-seal.jpg" alt="The seal">
+      </div>
+      <div class="subjects">
+        <figure><img class="fit" src="img/field.jpg" alt=""><figcaption class="label">The field</figcaption></figure>
+        <figure><img class="fit" src="img/harvest.jpg" alt=""><figcaption class="label">The hands</figcaption></figure>
+        <figure><img class="fit" src="img/grain-macro.jpg" alt=""><figcaption class="label">The grain</figcaption></figure>
+        <figure><img class="fit" src="img/family-table.jpg" alt=""><figcaption class="label">The table</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Aeroplane Basmati Brand Guidelines</span><span>07 In use</span></div>
+</section>
+
+<script>
+// the seal's garland of grains
+const wreath = document.getElementById('wreath');
+for (const side of [-1, 1]) for (let i = 0; i < 9; i++) {
+  const a = (side === -1 ? 200 + i * 17 : -20 - i * 17) * Math.PI / 180;
+  const x = 200 + Math.cos(a) * 101, y = 200 - Math.sin(a) * 101, tilt = -a * 180 / Math.PI + 90 + side * 28;
+  wreath.insertAdjacentHTML('beforeend', `<path d="M0-13C5-6 5 6 0 13C-5 6-5-6 0-13Z" transform="translate(${x} ${y}) rotate(${tilt})"/>`);
+}
+</script>
+</body>
+</html>
