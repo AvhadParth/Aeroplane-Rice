@@ -2,14 +2,14 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { CartButton, useCart } from './Cart';
 
 const links = [
-  ['#range', 'Shop'],
-  ['#heritage', 'Heritage'],
-  ['#fields', 'Fields'],
-  ['#kitchen', 'Recipes'],
-  ['#story', 'Our story'],
+  ['/#range', 'Shop'],
+  ['/#heritage', 'Heritage'],
+  ['/#fields', 'Fields'],
+  ['/#kitchen', 'Recipes'],
+  ['/#story', 'Our story'],
 ];
 
-export function Header() {
+export function Header({ plain = false }: { plain?: boolean }) {
   const menu = useRef<HTMLDialogElement>(null);
   const [solid, setSolid] = useState(false);
 
@@ -28,11 +28,11 @@ export function Header() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <p className="announce">Free 1 kg sugar with 5, 10 and 20 kg packs of Raw La-Taste Basmati. <a href="#range">Shop now</a></p>
-      <header className="site-header" data-solid={solid}>
+      <p className="announce">Free 1 kg sugar with 5, 10 and 20 kg packs of Raw La-Taste Basmati. <a href="/#range">Shop now</a></p>
+      <header className="site-header" data-solid={solid || plain}>
         <div className="site-header__bar">
-          <a className="site-header__logo" href="#top" aria-label="Aeroplane Basmati, home">
-            <img src="/assets/brand/logo-shield.png" alt="La-Taste Aeroplane Basmati" width={400} height={188} />
+          <a className="site-header__logo" href="/#top" aria-label="Aeroplane Basmati, home">
+            <img src="/assets/brand/logo-shield-clear.png" alt="La-Taste Aeroplane Basmati" width={400} height={188} />
           </a>
           <nav className="site-nav" aria-label="Main">
             {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
@@ -54,7 +54,7 @@ export function Header() {
           </div>
           <nav className="menu__nav" aria-label="Mobile">
             {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
-            <a href="#table">The Indian table</a>
+            <a href="/#table">The Indian table</a>
           </nav>
           <p className="menu__note">Long-grain basmati, since 1969.</p>
         </div>
@@ -77,7 +77,7 @@ export function ShopBar() {
 
   return (
     <div className="shop-bar" data-shown={shown} inert={!shown}>
-      <a className="btn" href="#range">Shop the range</a>
+      <a className="btn" href="/#range">Shop the range</a>
       <button type="button" className="btn btn--line" onClick={open}>Cart ({count})</button>
     </div>
   );

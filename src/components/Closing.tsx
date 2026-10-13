@@ -45,7 +45,7 @@ export function Promise() {
           <h2 className="display">One house, one name, since 1969.</h2>
           <p className="lede">Every Aeroplane pack comes from the same house: Amir Chand Jagdish Kumar (Exports) Limited.</p>
           <p>Turn any pack over and you will find its FSSAI licence, 10012011000454, printed on the back.</p>
-          <a className="btn btn--yellow" href="#range">Shop the range</a>
+          <a className="btn btn--yellow" href="/#range">Shop the range</a>
         </div>
       </div>
     </section>
@@ -67,7 +67,7 @@ export function Faq() {
         <div className="faq__head">
           <h2 className="display">Before you cook.</h2>
           <p className="lede">The questions we are asked most, answered plainly.</p>
-          <p><a className="btn" href="#range">Shop the range</a></p>
+          <p><a className="btn" href="/#range">Shop the range</a></p>
         </div>
         <div className="faq__list">
           {questions.map(([question, answer], i) => (
@@ -90,7 +90,7 @@ export function Footer() {
       </div>
       <div className="site-footer__body">
         <div className="site-footer__badge">
-          <img src="/assets/brand/logo-primary.png" alt="La-Taste Aeroplane Basmati Rice" width={400} height={400} loading="lazy" />
+          <img src="/assets/brand/logo-primary-clear.png" alt="La-Taste Aeroplane Basmati Rice" width={400} height={400} loading="lazy" />
         </div>
         <div className="pattern" aria-hidden="true" />
         <div className="wrap site-footer__grid">
@@ -98,21 +98,21 @@ export function Footer() {
           <nav className="site-footer__nav" aria-label="Footer">
             <div>
               <h2 className="label">Rice</h2>
-              <a href="#range">Basmati</a>
-              <a href="#range">Regional rice</a>
-              <a href="#range">Gifts and baskets</a>
+              <a href="/#range">Basmati</a>
+              <a href="/#range">Regional rice</a>
+              <a href="/#range">Gifts and baskets</a>
               <a href="https://shop.aeroplanerice.com" target="_blank" rel="noopener">Online shop</a>
             </div>
             <div>
               <h2 className="label">Cook</h2>
-              <a href="#kitchen">Recipes</a>
-              <a href="#table">The Indian table</a>
-              <a href="#faq">Cooking basmati</a>
+              <a href="/#kitchen">Recipes</a>
+              <a href="/#table">The Indian table</a>
+              <a href="/#faq">Cooking basmati</a>
             </div>
             <div>
               <h2 className="label">Company</h2>
-              <a href="#story">Our story</a>
-              <a href="#fields">Our fields</a>
+              <a href="/#story">Our story</a>
+              <a href="/#fields">Our fields</a>
               <a href="mailto:trade@aeroplanerice.com">Trade and export</a>
               <a href="mailto:hello@aeroplanerice.com">Contact</a>
             </div>
@@ -120,7 +120,7 @@ export function Footer() {
         </div>
         <div className="wrap site-footer__base">
           <p>© 2026 Aeroplane Basmati Rice, from the house of Amir Chand Jagdish Kumar (Exports) Limited. FSSAI licence 10012011000454.</p>
-          <p><a href="#top">Back to top</a></p>
+          <p><a href="/#top">Back to top</a></p>
         </div>
       </div>
     </footer>

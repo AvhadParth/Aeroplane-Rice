@@ -14,7 +14,7 @@ const reasons = [
 
 const FIRST = 8;
 
-function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
   const [size, setSize] = useState(firstInStock(product).size);
   const variant = product.variants.find((v) => v.size === size)!;
@@ -22,13 +22,13 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="product">
-      <a className="product__shot" href={product.url} target="_blank" rel="noopener" aria-label={`${product.name}, full details on the Aeroplane shop (opens in a new tab)`}>
+      <a className="product__shot" href={`/products/${product.id}`} aria-label={`${product.name}, see details`}>
         <img src={product.image} alt="" width={product.width} height={product.height} loading="lazy" decoding="async" />
         {!variant.inStock ? <span className="product__flag product__flag--out">Sold out</span>
           : saving > 0 && <span className="product__flag">Save {saving}%</span>}
       </a>
 
-      <h3>{product.name}</h3>
+      <h3><a href={`/products/${product.id}`}>{product.name}</a></h3>
       <p className="product__price">
         <b>{price(variant.price)}</b>
         {variant.was > variant.price && <s>{price(variant.was)}</s>}
@@ -50,6 +50,19 @@ function ProductCard({ product }: { product: Product }) {
         {variant.inStock ? 'Add to cart' : 'Sold out'}
       </button>
     </article>
+  );
+}
+
+export function Reasons() {
+  return (
+    <div className="reasons">
+      <h3>Why aged Aeroplane rice</h3>
+      <ul>
+        {reasons.map(([icon, text]) => (
+          <li key={text}><span className={`ico ico--${icon}`} aria-hidden="true" />{text}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -84,14 +97,7 @@ export function Range() {
           <p className="products__more"><button type="button" className="btn btn--line" onClick={() => setAll(true)}>Show all {matching.length}</button></p>
         )}
 
-        <div className="reasons">
-          <h3>Why aged Aeroplane rice</h3>
-          <ul>
-            {reasons.map(([icon, text]) => (
-              <li key={text}><span className={`ico ico--${icon}`} aria-hidden="true" />{text}</li>
-            ))}
-          </ul>
-        </div>
+        <Reasons />
       </div>
     </section>
   );

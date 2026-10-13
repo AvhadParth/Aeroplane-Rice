@@ -80,7 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             <div className="cart__empty">
               <span className="ico ico--bowl" aria-hidden="true" />
               <p>Your cart is empty.</p>
-              <a className="btn" href="#range" onClick={() => drawer.current?.close()}>Shop the range</a>
+              <a className="btn" href="/#range" onClick={() => drawer.current?.close()}>Shop the range</a>
             </div>
           ) : (
             <>
