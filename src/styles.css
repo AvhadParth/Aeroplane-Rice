@@ -139,6 +139,7 @@ h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; letter-spa
 .site-nav a::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: currentColor; scale: 0 1; transform-origin: left; transition: scale .35s var(--ease); }
 .site-nav a:hover::after { scale: 1 1; }
 .site-header__tools { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
+.account-link { width: 2.75rem; height: 2.75rem; flex: none; display: grid; place-items: center; color: inherit; }
 .cart-button { position: relative; width: 2.75rem; height: 2.75rem; flex: none; display: grid; place-items: center; border: 0; background: none; color: inherit; cursor: pointer; }
 .cart-button b { position: absolute; top: .2rem; right: .1rem; min-width: 1.125rem; height: 1.125rem; padding-inline: .25rem; display: grid; place-items: center; border-radius: 999px; background: var(--red); color: var(--white); font: 700 .625rem/1 var(--display); }
 .menu-button { width: 2.75rem; height: 2.75rem; flex: none; display: grid; place-content: center; gap: .45rem; border: 0; background: none; color: inherit; cursor: pointer; }
@@ -411,7 +412,7 @@ h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; letter-spa
 .markets li > a { flex: 1; align-content: start; }
 /* every logo sits in the same 3.5rem slot, so the tiles line up whatever the logo's shape */
 .markets__logo { height: 2.25rem; width: auto; max-width: 80%; margin-block: .625rem; }
-.markets__logo--flipkart { height: 3rem; margin-block: .25rem; margin-left: -.35rem; }
+.markets__logo--flipkart { height: 2.5rem; margin-block: .5rem; }
 .markets__logo--blinkit { height: 3.25rem; margin-block: .125rem; }
 .markets a .label { opacity: .7; color: inherit; }
 .markets a svg { position: absolute; right: clamp(1rem, 2vw, 1.75rem); top: clamp(1rem, 2vw, 1.75rem); transition: translate .3s var(--ease); }
@@ -423,39 +424,41 @@ h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; letter-spa
 .markets--compact ul { display: flex; flex-wrap: wrap; gap: .5rem; border: 0; }
 .markets--compact a { display: flex; align-items: center; gap: .4rem; padding: .6rem .9rem; border: 1.5px solid var(--rule); }
 .markets--compact .markets__logo { height: 1.125rem; max-width: none; margin: 0; }
-.markets--compact .markets__logo--flipkart { height: 1.5rem; }
+.markets--compact .markets__logo--flipkart { height: 1.25rem; }
 .markets--compact .markets__logo--blinkit { height: 1.75rem; }
 .markets--compact a { height: 2.75rem; background: var(--white); }
 .markets--compact a:hover { box-shadow: none; border-color: var(--indigo); }
 .markets--compact a svg { position: static; width: 14px; height: 14px; }
 
-/* ---------- 5. Fields ---------- */
-.fields { background: var(--night); --bg: var(--night); padding-bottom: var(--space); }
-.fields h3 { color: var(--rice); }
-.fields__hero { position: relative; display: grid; min-height: min(92svh, 60rem); overflow: hidden; }
-.fields__hero > div { position: absolute; inset: -8% 0; }
-.fields__hero img { width: 100%; height: 100%; object-fit: cover; }
-.fields__hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--night) 0%, rgb(20 17 42 / .55) 38%, rgb(20 17 42 / 0) 70%); }
-.fields__title { position: relative; z-index: 1; align-self: end; display: grid; gap: 1.5rem; padding-block: 12rem clamp(2rem, 5vw, 5rem); }
-.fields__title .display { max-width: 11em; }
-.journey { display: grid; grid-auto-flow: column; grid-auto-columns: min(72vw, 20rem); gap: 1.25rem; margin-top: clamp(2rem, 5vw, 5rem); margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-color: var(--yellow) transparent; }
-.journey__step { scroll-snap-align: start; display: grid; grid-template-rows: auto auto auto 1fr; gap: 1rem; align-content: start; counter-increment: step; }
-.journey__step .ico { font-size: 3.25rem; color: var(--yellow); }
-.journey__step h3 { display: flex; align-items: center; gap: 1rem; font-size: clamp(1.5rem, 2.3vw, 2.25rem); }
-.journey__step h3::before { content: counter(step); font: 600 .8125rem/1 var(--body); letter-spacing: .1em; color: var(--yellow); }
-.journey__step h3::after { content: ""; flex: 1; height: 2px; background: repeating-linear-gradient(to right, var(--yellow) 0 6px, transparent 6px 12px); opacity: .7; }
-.journey__step:last-child h3::after { content: none; }
-.journey__step .frame img { aspect-ratio: 3 / 4; }
-.crop-bowl { object-position: 50% 92%; }
-.fields__cta { margin-top: clamp(2.5rem, 5vw, 4.5rem); text-align: center; }
-.journey__step p { font-size: .9375rem; opacity: .86; max-width: 22em; }
+/* ---------- 5. Fields: five photographs, one open ---------- */
+.fields { padding-block: var(--space); }
+.stages { display: flex; flex-direction: column; gap: .4rem; }
+.stage { height: 4.25rem; transition: height .7s var(--ease); }
+.stage[data-open="true"] { height: 26rem; }
+.stage button { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; overflow: hidden; background: var(--night); color: var(--white); text-align: left; cursor: pointer; }
+.stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.5) saturate(.75); scale: 1.06; transition: filter .7s, scale 1.4s var(--ease); }
+.stage[data-open="true"] img { filter: none; scale: 1; }
+.stage button::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(20 17 42 / .8), rgb(20 17 42 / 0) 55%); opacity: 0; transition: opacity .6s; }
+.stage[data-open="true"] button::after { opacity: 1; }
+/* the name shown while a strip is closed */
+.stage__label { position: absolute; z-index: 1; left: 1.25rem; top: 50%; translate: 0 -50%; display: flex; align-items: baseline; gap: .9rem; font: 600 1.375rem/1 var(--display); letter-spacing: -.03em; transition: opacity .3s; }
+.stage__label i { font: 600 .75rem/1 var(--body); font-style: normal; letter-spacing: .1em; color: var(--yellow); }
+.stage[data-open="true"] .stage__label { opacity: 0; }
+/* the words shown on the open photograph */
+.stage__caption { position: absolute; z-index: 1; left: clamp(1.25rem, 2.5vw, 2.5rem); bottom: clamp(1.25rem, 2.5vw, 2.5rem); width: min(24rem, calc(100vw - 4rem)); display: grid; gap: .6rem; opacity: 0; translate: 0 1rem; transition: opacity .3s, translate .3s; }
+.stage[data-open="true"] .stage__caption { opacity: 1; translate: 0 0; transition: opacity .6s .35s, translate .7s .35s var(--ease); }
+.stage__caption i { font: 600 .75rem/1 var(--body); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
+.stage__caption b { font: 600 clamp(2.75rem, 5.5vw, 5.5rem)/.95 var(--display); letter-spacing: -.05em; }
+.stage__caption > span { font-size: clamp(1rem, 1.25vw, 1.1875rem); line-height: 1.45; max-width: 20em; }
+.fields__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: clamp(1.75rem, 3vw, 2.75rem); padding-top: clamp(1.5rem, 2.5vw, 2rem); border-top: 1px solid var(--rule); color: var(--indigo); }
 @media (min-width: 900px) {
-  .journey { grid-auto-flow: row; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin-inline: 0; padding: 0; overflow: visible; }
-  .journey__step { padding-right: clamp(1rem, 1.8vw, 2rem); }
-  .journey__step:nth-child(2) .frame img { aspect-ratio: 4 / 5; }
-  .journey__step:nth-child(3) .frame img { aspect-ratio: 2 / 3; }
-  .journey__step:nth-child(4) .frame img { aspect-ratio: 1; }
-  .journey__step:nth-child(5) .frame img { aspect-ratio: 3 / 4.4; }
+  .stages { flex-direction: row; gap: .5rem; height: clamp(28rem, 72vh, 46rem); }
+  .stage, .stage[data-open="true"] { height: auto; }
+  .stage { flex: 1 1 0; min-width: 0; transition: flex-grow .8s var(--ease); }
+  .stage[data-open="true"] { flex-grow: 7; }
+  /* closed strips carry their name up the side */
+  .stage__label { left: 50%; top: auto; bottom: 1.75rem; translate: -50% 0; writing-mode: vertical-rl; rotate: 180deg; font-size: clamp(1.25rem, 1.7vw, 1.75rem); white-space: nowrap; }
+  .stage__label i { writing-mode: horizontal-tb; rotate: 180deg; }
 }
 
 /* ---------- 6. The Indian table: the menu ---------- */
@@ -463,7 +466,7 @@ h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; letter-spa
 .menu-list { display: grid; gap: 2.5rem; }
 .dish { display: grid; gap: 1rem; color: var(--indigo); }
 .dish__name { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; width: 100%; padding: 0 0 .9rem; border: 0; border-bottom: 2px solid var(--indigo); background: none; text-align: left; cursor: pointer; color: inherit; }
-.dish__name b { font: 600 clamp(2.25rem, 6vw, 6rem)/1 var(--display); letter-spacing: -.05em; }
+.dish__name b { font: 600 clamp(2rem, 4.8vw, 4.75rem)/1 var(--display); letter-spacing: -.05em; }
 .dish__body > div { display: grid; gap: 1.25rem; justify-items: start; color: var(--night); max-width: 30em; }
 .dish .frame { aspect-ratio: 4 / 3; }
 .table__stage { display: none; }
@@ -652,5 +655,5 @@ h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; letter-spa
   .stamp svg, .ticker__track { animation: none; }
   .ticker__track { flex-wrap: wrap; width: auto; }
   .ticker__group[aria-hidden] { display: none; }
-  .btn, .dish__name, .dish__body, .story__media img, .cart, .shop-bar { transition: none; }
+  .btn, .dish__name, .dish__body, .story__media img, .cart, .shop-bar, .stage, .stage img, .stage__caption { transition: none; }
 }

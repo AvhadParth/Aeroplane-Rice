@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { ACCOUNT_URL } from '../products';
 import { CartButton, useCart } from './Cart';
 
 const links = [
@@ -38,6 +39,11 @@ export function Header({ plain = false }: { plain?: boolean }) {
             {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
           </nav>
           <div className="site-header__tools">
+            <a className="account-link" href={ACCOUNT_URL} target="_blank" rel="noopener" aria-label="Your account, on the Aeroplane online shop (opens in a new tab)">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.6" /><path d="M5 20c.8-3.6 3.5-5.4 7-5.4s6.2 1.8 7 5.4" />
+              </svg>
+            </a>
             <CartButton />
             <button className="menu-button" type="button" aria-haspopup="dialog" aria-label="Open menu" onClick={() => menu.current?.showModal()}>
               <span /><span />
@@ -55,6 +61,7 @@ export function Header({ plain = false }: { plain?: boolean }) {
           <nav className="menu__nav" aria-label="Mobile">
             {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
             <a href="/#table">The Indian table</a>
+            <a href={ACCOUNT_URL} target="_blank" rel="noopener">Account</a>
           </nav>
           <p className="menu__note">Long-grain basmati, since 1969.</p>
         </div>

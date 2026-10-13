@@ -876,6 +876,8 @@ export const products: Product[] = [
 
 export const categories = ['Basmati', 'Regional rice', 'Speciality', 'Gifts and baskets', 'Kitchen staples'];
 export const SHOP_URL = 'https://shop.aeroplanerice.com';
+// Customer accounts live on the shop. When the shop moves to Shopify, change this one address.
+export const ACCOUNT_URL = `${SHOP_URL}/my-account/`;
 
 const rupees = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
 export const price = (amount: number) => rupees.format(amount);
