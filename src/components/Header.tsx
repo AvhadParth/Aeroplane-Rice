@@ -11,6 +11,15 @@ const links = [
 
 export function Header() {
   const menu = useRef<HTMLDialogElement>(null);
+  const [solid, setSolid] = useState(false);
+
+  // clear over the opening photograph, white once the page starts to move
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > 90);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const onMenuClick = (event: MouseEvent<HTMLDialogElement>) => {
     if ((event.target as HTMLElement).closest('.menu__close, .menu__nav a')) menu.current?.close();
@@ -20,19 +29,20 @@ export function Header() {
     <>
       <a className="skip" href="#main">Skip to content</a>
       <p className="announce">Free 1 kg sugar with 5, 10 and 20 kg packs of Raw La-Taste Basmati. <a href="#range">Shop now</a></p>
-      <header className="site-header">
-        <div className="site-header__pill">
+      <header className="site-header" data-solid={solid}>
+        <div className="site-header__bar">
           <a className="site-header__logo" href="#top" aria-label="Aeroplane Basmati, home">
             <img src="/assets/brand/logo-shield.png" alt="La-Taste Aeroplane Basmati" width={400} height={188} />
           </a>
           <nav className="site-nav" aria-label="Main">
             {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
           </nav>
-          <a className="btn btn--small site-header__cta" href="#range">Shop now</a>
-          <CartButton />
-          <button className="menu-button" type="button" aria-haspopup="dialog" aria-label="Open menu" onClick={() => menu.current?.showModal()}>
-            <span /><span />
-          </button>
+          <div className="site-header__tools">
+            <CartButton />
+            <button className="menu-button" type="button" aria-haspopup="dialog" aria-label="Open menu" onClick={() => menu.current?.showModal()}>
+              <span /><span />
+            </button>
+          </div>
         </div>
       </header>
 

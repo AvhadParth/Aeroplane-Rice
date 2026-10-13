@@ -47,7 +47,7 @@ export function Story() {
           {pages.map((entry) => (
             <li className="album__page" key={entry.year}>
               <m.span className="album__ghost" style={pinned ? { x: drift } : undefined} aria-hidden="true">{entry.year}</m.span>
-              <figure className="arch album__photo"><Img name={entry.photo} alt={entry.alt} sizes="(min-width: 900px) 28vw, 70vw" /></figure>
+              <figure className="album__photo"><Img name={entry.photo} alt={entry.alt} sizes="(min-width: 900px) 28vw, 70vw" /></figure>
               <div className="album__text">
                 <h3>{entry.year}</h3>
                 <p>{entry.text}</p>

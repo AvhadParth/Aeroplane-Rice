@@ -6,9 +6,9 @@ const HEADLINE = 'The long grain of India.';
 const ZOOM = 150;
 
 /**
- * The opening. A cream sheet covers a photograph, and the headline is cut out of the sheet,
- * so the picture shows only through the letters. Scrolling moves in through the stem of the
- * "l" until the photograph fills the screen.
+ * The opening. It begins on the photograph. Scrolling draws back, and a white sheet closes
+ * over the picture with the headline cut out of it, so the field is left showing only through
+ * the letters. The view pulls out of the stem of the "l".
  */
 export function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -20,10 +20,10 @@ export function Hero() {
   const reduced = useReducedMotion();
 
   const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
-  const intro = useTransform(scrollYProgress, [0.09, 0.2], [1, 0]);
-  const outro = useTransform(scrollYProgress, [0.72, 0.92], [0, 1]);
-  const photo = useTransform(scrollYProgress, [0, 1], [1.16, 1]);
-  const sheet = useTransform(scrollYProgress, [0.6, 0.74], [1, 0]);
+  const opening = useTransform(scrollYProgress, [0.06, 0.16], [1, 0]);
+  const sheet = useTransform(scrollYProgress, [0.1, 0.24], [0, 1]);
+  const closing = useTransform(scrollYProgress, [0.74, 0.88], [0, 1]);
+  const photo = useTransform(scrollYProgress, [0, 1], [1, 1.14]);
 
   const narrow = box.w < 760;
   const lines = narrow ? ['The long', 'grain', 'of India.'] : ['The long grain', 'of India.'];
@@ -33,8 +33,8 @@ export function Hero() {
 
   const place = useCallback((progress: number) => {
     if (!cut.current) return;
-    const eased = Math.min(1, Math.max(0, (progress - 0.1) / 0.62));
-    const scale = reduced ? 1 : Math.exp(eased * eased * Math.log(ZOOM));
+    const drawn = Math.min(1, Math.max(0, (progress - 0.1) / 0.66));
+    const scale = reduced ? 1 : Math.exp((1 - drawn) ** 2 * Math.log(ZOOM));
     const { x, y } = origin.current;
     cut.current.setAttribute('transform', `translate(${x} ${y}) scale(${scale}) translate(${-x} ${-y})`);
   }, [reduced]);
@@ -81,27 +81,25 @@ export function Hero() {
                 </g>
               </mask>
             </defs>
-            <rect width={box.w} height={box.h} fill="#FBF6E9" mask="url(#hero-cut)" />
+            <rect width={box.w} height={box.h} fill="#FDFCF9" mask="url(#hero-cut)" />
           </m.svg>
         )}
 
-        <m.div className="wrap hero__intro" style={{ opacity: reduced ? 1 : intro }}>
-          <p className="label hero__since">Aged basmati, since 1969</p>
-          <div className="hero__foot">
-            <p className="lede">Basmati grown at the foot of the Himalayas, cut by hand, and rested for eight months before it is milled.</p>
-            <div className="hero__actions">
-              <a className="btn" href="#range">Shop the range</a>
-              <a className="btn btn--line" href="#heritage">Our heritage</a>
-            </div>
-          </div>
-        </m.div>
-
         {!reduced && (
-          <m.div className="wrap hero__outro" style={{ opacity: outro }}>
-            <p>Slender, fragrant, and never in a hurry.</p>
+          <m.div className="wrap hero__opening" style={{ opacity: opening }}>
+            <p className="label">Aged basmati, since 1969</p>
+            <p className="hero__say">Slender, fragrant, and never in a hurry.</p>
             <a className="btn btn--yellow" href="#range">Shop the range</a>
           </m.div>
         )}
+
+        <m.div className="wrap hero__closing" style={{ opacity: reduced ? 1 : closing }}>
+          <p className="lede">Basmati grown at the foot of the Himalayas, cut by hand, and rested for eight months before it is milled.</p>
+          <div className="hero__actions">
+            <a className="btn" href="#range">Shop the range</a>
+            <a className="btn btn--line" href="#heritage">Our heritage</a>
+          </div>
+        </m.div>
       </div>
     </section>
   );
